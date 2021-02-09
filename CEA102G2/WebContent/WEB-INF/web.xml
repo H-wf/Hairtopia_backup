@@ -39,4 +39,12 @@
     <servlet-name>TagServlet</servlet-name>
     <url-pattern>/tag/tag.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>TagdetServlet</servlet-name>
+    <servlet-class>com.tagdet.controller.TagdetServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TagdetServlet</servlet-name>
+    <url-pattern>/tagdet/tagdet.do</url-pattern>
+  </servlet-mapping>
 </web-app>

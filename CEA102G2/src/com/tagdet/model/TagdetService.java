@@ -10,7 +10,7 @@ public class TagdetService {
 		dao = new TagdetDAO();
 	}
 	
-	public TagdetVO addTag(Integer tagNo,Integer postNo) {
+	public TagdetVO addTagdet(Integer tagNo,Integer postNo) {
 		TagdetVO tagdetVo = new TagdetVO();
 		
 		tagdetVo.setTagNo(tagNo);
