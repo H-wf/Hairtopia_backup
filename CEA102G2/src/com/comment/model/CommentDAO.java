@@ -1,21 +1,28 @@
 package com.comment.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
-
-public class CommentDAO_JDBC implements CommentDAO_Interface{
+public class CommentDAO implements CommentDAO_Interface{
 	
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/hairtopia?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String pw = "1qaz2wsx";
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/root");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private static final String INSERT_STMT = "INSERT INTO COMMENT(postNo,memNo,comCon) VALUES(?,?,?);";
 	private static final String GET_ALL_STMT = "SELECT * FROM hairtopia.comment;";
@@ -32,22 +39,17 @@ public class CommentDAO_JDBC implements CommentDAO_Interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, pw);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setInt(1, commentVo.getPostNo());
 			pstmt.setInt(2, commentVo.getMemNo());
 			pstmt.setString(3, commentVo.getComCon());
 			
 			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
+		}  catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		}		
 	}
 	@Override
 	public void update(CommentVO commentVo) {
@@ -75,8 +77,7 @@ public class CommentDAO_JDBC implements CommentDAO_Interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, pw);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -93,10 +94,6 @@ public class CommentDAO_JDBC implements CommentDAO_Interface{
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -127,30 +124,6 @@ public class CommentDAO_JDBC implements CommentDAO_Interface{
 		return list;
 	}
 	
-	public static void main(String[] args) {
-		CommentDAO_JDBC dao = new CommentDAO_JDBC();
-		
-		//新增
-			
-//			CommentVO commentVo = new CommentVO();
-//			
-//			commentVo.setPostNo(8);
-//			commentVo.setMemNO(8);
-//			commentVo.setComCon("油");
-//			dao.insert(commentVo);
-			
-		//查全部
-			List<CommentVO> list = dao.getAll();
-			for (CommentVO aComment : list) {
-				System.out.print(aComment.getComNo() + ",");
-				System.out.print(aComment.getPostNo() + ",");
-				System.out.print(aComment.getMemNo() + ",");
-				System.out.print(aComment.getComCon() + ",");
-				System.out.print(aComment.getComTime() + ",");
-				System.out.print(aComment.isComStatus());
-				System.out.println();
-			}
-	}
 	
 
 }

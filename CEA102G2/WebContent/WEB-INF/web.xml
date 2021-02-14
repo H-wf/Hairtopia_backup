@@ -47,4 +47,12 @@
     <servlet-name>TagdetServlet</servlet-name>
     <url-pattern>/tagdet/tagdet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>CommentServlet</servlet-name>
+    <servlet-class>com.comment.controller.CommentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CommentServlet</servlet-name>
+    <url-pattern>/comment/comment.do</url-pattern>
+  </servlet-mapping>
 </web-app>

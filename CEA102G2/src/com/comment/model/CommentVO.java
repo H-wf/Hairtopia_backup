@@ -3,7 +3,7 @@ package com.comment.model;
 public class CommentVO implements java.io.Serializable{
 	private Integer comNo;
 	private Integer postNo;
-	private Integer memNO;
+	private Integer memNo;
 	private String comCon;
 	private java.sql.Date comTime;
 	private boolean comStatus;
@@ -21,11 +21,11 @@ public class CommentVO implements java.io.Serializable{
 	public void setPostNo(Integer postNo) {
 		this.postNo = postNo;
 	}
-	public Integer getMemNO() {
-		return memNO;
+	public Integer getMemNo() {
+		return memNo;
 	}
-	public void setMemNO(Integer memNO) {
-		this.memNO = memNO;
+	public void setMemNo(Integer memNO) {
+		this.memNo = memNO;
 	}
 	public String getComCon() {
 		return comCon;
