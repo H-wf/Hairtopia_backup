@@ -24,4 +24,20 @@ public class TagService {
 	public List<TagVO> getAll() {
 		return dao.getAll();
 	}
+	
+public TagVO updateTag(Integer tagNo,String tagName) {
+		
+		TagVO tagVo = new TagVO();
+		
+		tagVo.setTagNo(tagNo);
+		tagVo.setTagName(tagName);
+		
+		dao.update(tagVo);
+		
+		return tagVo;
+	}
+	
+	public void deleteTag(Integer tagNo) {
+		dao.delete(tagNo);
+	}
 }

@@ -56,7 +56,7 @@ public class CommentServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 		
-		if("getOne_For_Update".equals(action)) {
+		if("update_Comment".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			

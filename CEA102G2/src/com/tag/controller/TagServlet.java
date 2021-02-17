@@ -29,7 +29,7 @@ public class TagServlet extends HttpServlet {
 			
 			String tagName = req.getParameter("tagName");
 			if (tagName == null || tagName.trim().length() == 0) {
-				errorMsgs.add("檢舉內容請勿空白");
+				errorMsgs.add("標籤內容請勿空白");
 			}
 			TagVO tagVo = new TagVO();
 			tagVo.setTagName(tagName);
@@ -41,6 +41,49 @@ public class TagServlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 			
+		}
+		
+		if("update_Tag".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			Integer tagNo = new Integer(req.getParameter("tagNo"));
+			if(tagNo == null ||tagNo == 0) {
+				errorMsgs.add("請輸入標籤編號");
+			}
+			
+			String tagName = req.getParameter("tagName");
+			if (tagName == null || tagName.trim().length() == 0) {
+				errorMsgs.add("標籤內容請勿空白");
+			}
+			
+			TagVO tagVo = new TagVO();
+			tagVo.setTagNo(tagNo);
+			tagVo.setTagName(tagName);
+			
+			TagService tagSvc = new TagService();
+			tagSvc.updateTag(tagNo, tagName);
+			
+			String url = "/back-end/listAllTag.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+		}
+		
+		if("delete_Tag".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			Integer tagNo = new Integer(req.getParameter("tagNo"));
+			if(tagNo == null ||tagNo == 0) {
+				errorMsgs.add("請輸入標籤編號");
+			}
+			
+			TagService tagSvc = new TagService();
+			tagSvc.deleteTag(tagNo);
+			
+			String url = "/back-end/listAllTag.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
 		}
 	}
 

@@ -19,11 +19,8 @@ public class TagDAO_JDBC implements TagDAO_Interface{
 	
 	private static final String INSERT_STMT = "INSERT INTO TAG(tagName) VALUES(?);";
 	private static final String GET_ALL_STMT = "SELECT * FROM hairtopia.tag;";
-	private static final String GET_ONE_STMT = "SELECT desNo , postCon, postPic1 FROM post where postNo = ?";	//back-end
-	private static final String GET_DES_POST = "SELECT desNo , postCon, postPic1 FROM post where desNo = ?";	//front-end 複合查詢設計師名
-	
-	private static final String DELETE = "";
-	private static final String UPDATE = "";
+	private static final String DELETE = "DELETE FROM hairtopia.tag WHERE tagNo = ?;";
+	private static final String UPDATE = "UPDATE hairtopia.tag SET tagName=? WHERE tagNo=?;";
 	
 	
 	@Override
@@ -50,13 +47,44 @@ public class TagDAO_JDBC implements TagDAO_Interface{
 	
 	@Override
 	public void update(TagVO tagVo) {
-		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement pstmt = null;
 		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, pw);
+			pstmt = con.prepareStatement(UPDATE);
+			pstmt.setString(1, tagVo.getTagName());
+			pstmt.setInt(2, tagVo.getTagNo());
+			
+			pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 	@Override
 	public void delete(Integer tagNo) {
-		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement pstmt = null;
 		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, pw);
+			pstmt = con.prepareStatement(DELETE);
+			pstmt.setInt(1, tagNo);
+			
+			pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}				
 	}
 	@Override
 	public TagVO findByPrimaryKey(Integer tagNo) {
@@ -131,6 +159,17 @@ public class TagDAO_JDBC implements TagDAO_Interface{
 //		
 //		tagVo.setTagName("告別油膩");
 //		dao.insert(tagVo);
+		
+	//DELETE
+		
+//		dao.delete(2);
+		
+	//update
+		
+		TagVO tagVo = new TagVO();
+		tagVo.setTagNo(3);;
+		tagVo.setTagName("11");
+		dao.update(tagVo);
 		
 	//查全部
 		List<TagVO> list = dao.getAll();

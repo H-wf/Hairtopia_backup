@@ -25,6 +25,20 @@
 		<tr>
 			<td>${tagVo.tagNo}</td>
 			<td>${tagVo.tagName}</td>
+			<td>
+				<FORM method="post" action="<%=request.getContextPath()%>/tag/tag.do">
+			     <input type="text" name="tagName">
+			     <input type="submit" value="修改">
+			     <input type="hidden" name="tagNo" value= "${tagVo.tagNo}">
+			     <input type="hidden" name="action"	value="update_Tag"></FORM>
+				</td>
+				
+				<td>
+				<FORM method="post" action="<%=request.getContextPath()%>/tag/tag.do">
+			     <input type="submit" value="刪除">
+			     <input type="hidden" name="tagNo" value= "${tagVo.tagNo}">
+			     <input type="hidden" name="action"	value="delete_Tag"></FORM>
+				</td>
 		</tr>
 	</c:forEach>
 </table>
