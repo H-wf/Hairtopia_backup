@@ -26,14 +26,30 @@
 		<th>留言狀態</th>
 	</tr>
 	<c:forEach var="commentVo" items="${list}">
-		
 		<tr>
-			<td>${commentVo.comNo}</td>
-			<td>${commentVo.postNo}</td>
-			<td>${commentVo.memNo}</td>
-			<td>${commentVo.comCon}</td>
-			<td>${commentVo.comTime}</td>
-			<td>${commentVo.comStatus}</td>
+			
+				<td>${commentVo.comNo}</td>
+				<td>${commentVo.postNo}</td>
+				<td>${commentVo.memNo}</td>
+				<td>${commentVo.comCon}</td>
+				<td>${commentVo.comTime}</td>
+				<td>${commentVo.comStatus}</td>
+				
+				<td>
+				<FORM method="post" action="<%=request.getContextPath()%>/comment/comment.do">
+			     <input type="text" name="comCon">
+			     <input type="submit" value="修改">
+			     <input type="hidden" name="comNo" value= "${commentVo.comNo}">
+			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
+				</td>
+				
+				<td>
+				<FORM method="post" action="<%=request.getContextPath()%>/comment/comment.do">
+			     <input type="submit" value="刪除">
+			     <input type="hidden" name="comNo" value= "${commentVo.comNo}">
+			     <input type="hidden" name="action"	value="delete_Comment"></FORM>
+				</td>
+				
 		</tr>
 	</c:forEach>
 </table>

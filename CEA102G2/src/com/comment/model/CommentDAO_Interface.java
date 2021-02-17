@@ -8,7 +8,7 @@ public interface CommentDAO_Interface {
 	public void insert(CommentVO commentVo);
     public void update(CommentVO commentVo);
     public void delete(Integer comNo);
-    public CommentVO findByPrimaryKey(Integer comNo);
+    public List getComOfApost(Integer postNo);
     public List<CommentVO> getAll();
     //萬用複合查詢(傳入參數型態Map)(回傳 List)
 //  public List<EmpVO> getAll(Map<String, String[]> map);

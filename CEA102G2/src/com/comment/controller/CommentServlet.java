@@ -55,6 +55,49 @@ public class CommentServlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
+		
+		if("getOne_For_Update".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			String comCon = req.getParameter("comCon");
+			if (comCon == null || comCon.trim().length() == 0) {
+				errorMsgs.add("留言內容請勿空白!");
+			}
+			Integer comNo = new Integer(req.getParameter("comNo"));
+			if (comNo == null || comNo == 0) {
+				errorMsgs.add("請填入有效貼文編號!");
+			}
+			
+			CommentVO commentVo = new CommentVO();
+			commentVo.setPostNo(comNo);
+			commentVo.setComCon(comCon);
+			
+			CommentService commentSvc = new CommentService();
+			commentSvc.updateComment(comNo, comCon);
+			
+			String url = "/back-end/listAllComment.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+		}
+		
+		if("delete_Comment".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			Integer comNo = new Integer(req.getParameter("comNo"));
+			if (comNo == null || comNo == 0) {
+				errorMsgs.add("請填入有效貼文編號!");
+			}
+			
+			CommentService commentSvc = new CommentService();
+			commentSvc.deleteComment(comNo);
+			
+			String url = "/back-end/listAllComment.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+			
+		}
 	}
 
 }

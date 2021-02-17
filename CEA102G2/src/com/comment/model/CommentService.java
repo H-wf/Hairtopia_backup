@@ -26,4 +26,20 @@ public class CommentService {
 	public List<CommentVO> getAll() {
 		return dao.getAll();
 	}
+	
+	public CommentVO updateComment(Integer comNo,String comCon) {
+		
+		CommentVO commentVo = new CommentVO();
+		
+		commentVo.setComNo(comNo);
+		commentVo.setComCon(comCon);
+		
+		dao.update(commentVo);
+		
+		return commentVo;
+	}
+	
+	public void deleteComment(Integer comNo) {
+		dao.delete(comNo);
+	}
 }
