@@ -1,21 +1,28 @@
 package com.comrep.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
-
-public class ComrepDAO_JDBC implements ComrepDAO_Interface{
+public class ComrepDAO implements ComrepDAO_Interface{
 	
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/hairtopia?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String pw = "1qaz2wsx";
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/root");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private static final String INSERT_STMT = "INSERT INTO COMREP(comNo,memNo,crepCon) VALUES(?,?,?);";
 	private static final String GET_ALL_STMT = "SELECT * FROM hairtopia.comrep;";
@@ -31,8 +38,7 @@ public class ComrepDAO_JDBC implements ComrepDAO_Interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, pw);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setInt(1, comrepVo.getComNo());
 			pstmt.setInt(2, comrepVo.getMemNo());
@@ -40,14 +46,12 @@ public class ComrepDAO_JDBC implements ComrepDAO_Interface{
 			
 			pstmt.executeUpdate();
 			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
+		}  catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 	}
+		
 	@Override
 	public void update(ComrepVO comrepVo) {
 		// TODO Auto-generated method stub
@@ -65,7 +69,6 @@ public class ComrepDAO_JDBC implements ComrepDAO_Interface{
 	}
 	@Override
 	public List<ComrepVO> getAll() {
-		
 		List<ComrepVO> list = new ArrayList<ComrepVO>();
 		ComrepVO comrepVo = null;
 
@@ -75,8 +78,7 @@ public class ComrepDAO_JDBC implements ComrepDAO_Interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, pw);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -93,10 +95,6 @@ public class ComrepDAO_JDBC implements ComrepDAO_Interface{
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -127,29 +125,6 @@ public class ComrepDAO_JDBC implements ComrepDAO_Interface{
 		return list;
 	}
 	
-	public static void main(String[] args) {
-		ComrepDAO_JDBC dao = new ComrepDAO_JDBC();
-		
-		//新增
-		
-//		ComrepVO comrepVo = new ComrepVO();
-//		
-//		comrepVo.setComNo(1);
-//		comrepVo.setMemNo(8);
-//		comrepVo.setCrepCon("油");
-//		dao.insert(comrepVo);
-		
-	//查全部
-		List<ComrepVO> list = dao.getAll();
-		for (ComrepVO aComrep : list) {
-			System.out.print(aComrep.getCrepNo() + ",");
-			System.out.print(aComrep.getComNo() + ",");
-			System.out.print(aComrep.getMemNo() + ",");
-			System.out.print(aComrep.getCrepCon() + ",");
-			System.out.print(aComrep.getCrepTime() + ",");
-			System.out.print(aComrep.getCrepStatus());
-			System.out.println();
-		}
-	}
+	
 
 }

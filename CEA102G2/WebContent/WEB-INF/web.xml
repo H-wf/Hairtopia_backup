@@ -55,4 +55,12 @@
     <servlet-name>CommentServlet</servlet-name>
     <url-pattern>/comment/comment.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ComrepServlet</servlet-name>
+    <servlet-class>com.comrep.controller.ComrepServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ComrepServlet</servlet-name>
+    <url-pattern>/comrep/comrep.do</url-pattern>
+  </servlet-mapping>
 </web-app>

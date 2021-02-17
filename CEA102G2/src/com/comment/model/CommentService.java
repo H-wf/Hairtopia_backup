@@ -15,7 +15,7 @@ public class CommentService {
 		CommentVO commentVo = new CommentVO();
 		
 		commentVo.setPostNo(postNo);
-		commentVo.setMemNo(postNo);
+		commentVo.setMemNo(memNo);
 		commentVo.setComCon(comCon);
 		
 		dao.insert(commentVo);
