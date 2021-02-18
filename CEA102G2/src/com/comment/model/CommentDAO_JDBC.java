@@ -21,7 +21,7 @@ public class CommentDAO_JDBC implements CommentDAO_Interface{
 	private static final String GET_ALL_STMT = "SELECT * FROM hairtopia.comment;";
 	private static final String COM_OF_APOST = "SELECT comNo , postNo, memNO , comCon , comTime , comStatus FROM hairtopia.comment where postNo = ?;";
 	
-	private static final String DELETE = "DELETE FROM hairtopia.comment WHERE comNo = ?;";
+	private static final String DELETE = "UPDATE hairtopia.comment SET comStatus=false WHERE comNo=6;";
 	private static final String UPDATE = "UPDATE hairtopia.comment SET comCon=? WHERE comNo=?;";
 	
 	
