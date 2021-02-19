@@ -26,7 +26,7 @@ public class CommentServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
-		if("insert".equals(action)) {
+		if("insert".equals(action) || "insert_Front".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			
@@ -58,7 +58,13 @@ public class CommentServlet extends HttpServlet {
 			
 			req.setAttribute("postVO", postVO);
 			
-			String url = "/back-end/Comment/listPostWithComments.jsp";
+			String url="";
+			
+			if("insert".equals(action)) {
+				url = "/back-end/Post/listPostWithComments.jsp";
+			}else if("insert_Front".equals(action)) {
+				url = "/front-end/Post/listPostWithComments_front.jsp";
+			}
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
@@ -66,6 +72,8 @@ public class CommentServlet extends HttpServlet {
 		if("update_Comment".equals(action) || "update_Comment_Front".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+			
+			Integer postNo = new Integer(req.getParameter("postNo"));
 			
 			String comCon = req.getParameter("comCon");
 			if (comCon == null || comCon.trim().length() == 0) {
@@ -83,11 +91,16 @@ public class CommentServlet extends HttpServlet {
 			CommentService commentSvc = new CommentService();
 			commentSvc.updateComment(comNo, comCon);
 			
+			PostService postSvc = new PostService();
+			PostVO postVO = postSvc.getOnePost(postNo);
+			
+			req.setAttribute("postVO", postVO);
+			
 			String url = "";
 			if("update_Comment".equals(action)) {
-				url = "/back-end/Comment/listAllComment.jsp";
+				url = "/back-end/Post/listPostWithComments.jsp";
 			}else if("update_Comment_Front".equals(action)) {
-				url = "/front-end/Comment/listAllComment_front.jsp";
+				url = "/front-end/Post/listPostWithComments_front.jsp";
 			}
 			
 			RequestDispatcher successView = req.getRequestDispatcher(url);
@@ -96,9 +109,11 @@ public class CommentServlet extends HttpServlet {
 		
 
 		
-		if("delete_Comment".equals(action)) {
+		if("delete_Comment".equals(action) || "delete_Comment_Front".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+			
+			Integer postNo = new Integer(req.getParameter("postNo"));
 			
 			Integer comNo = new Integer(req.getParameter("comNo"));
 			if (comNo == null || comNo == 0) {
@@ -113,34 +128,23 @@ public class CommentServlet extends HttpServlet {
 			CommentService commentSvc = new CommentService();
 			commentSvc.deleteComment(commentVo);
 			
-			String url = "/back-end/Comment/listAllComment.jsp";
+			PostService postSvc = new PostService();
+			PostVO postVO = postSvc.getOnePost(postNo);
+			
+			req.setAttribute("postVO", postVO);
+			
+			String url ="";
+			
+			if("delete_Comment".equals(action)) {
+				url = "/back-end/Post/listPostWithComments.jsp";
+			}else if("delete_Comment_Front".equals(action)) {
+				url = "/front-end/Post/listPostWithComments_front.jsp";
+			}
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 			
 		}
 		
-		if("delete_Comment_Front".equals(action)) {
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("errorMsgs", errorMsgs);
-			
-			Integer comNo = new Integer(req.getParameter("comNo"));
-			if (comNo == null || comNo == 0) {
-				errorMsgs.add("請填入有效貼文編號!");
-			}
-			Boolean comStatus = new Boolean(req.getParameter("comStatus"));
-			
-			CommentVO commentVo = new CommentVO();
-			commentVo.setComNo(comNo);
-			commentVo.setComStatus(comStatus);
-			
-			CommentService commentSvc = new CommentService();
-			commentSvc.deleteComment(commentVo);
-			
-			String url = "/front-end/Comment/listAllComment_ftont.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url);
-			successView.forward(req, res);
-			
-		}
 	}
 
 }

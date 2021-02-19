@@ -169,9 +169,9 @@ public class PostServlet extends HttpServlet {
 				req.setAttribute("postVO", postVO); // 資料庫取出的lecVO物件,存入req
 				String url = "";
 				if ("getOne_For_Display".equals(action)) {
-					url = "/front-end/Post/listOnePost.jsp";
+					url = "/front-end/Post/listPostWithComments_front.jsp";
 				} else if ("getOne_For_Display_back".equals(action)) {
-					url = "/back-end/Comment/listPostWithComments.jsp";
+					url = "/back-end/Post/listPostWithComments.jsp";
 				}
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneLec.jsp
 				successView.forward(req, res);
