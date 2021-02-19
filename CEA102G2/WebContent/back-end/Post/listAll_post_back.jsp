@@ -56,8 +56,12 @@ img {
 			<th>貼文狀態</th>
 			<th>優先度</th>
 			<th>照片1</th>
+			<c:if test='${not empty postVO.postPic2}'>
 			<th>照片2</th>
+			</c:if>
+			<c:if test='${not empty postVO.postPic3}'>
 			<th>照片3</th>
+			</c:if>	
 			
 		</tr>
 		<c:forEach  var="postVO" items="${list}">
@@ -100,10 +104,19 @@ img {
 						<input type="hidden" name="action" value="deleteBack">
 					</FORM>
 				</td>
-						
+					
+				<td>
+					<FORM METHOD="post"
+							ACTION="<%=request.getContextPath()%>/post/post.do"
+							style="margin-bottom: 0px;">
+							<input type="submit" value="查看"> 
+							<input type="hidden" name="postNo" value="${postVO.postNo}"> 
+							<input type="hidden" name="action" value="getOne_For_Display_back">
+					</FORM>
+				</td>
 		</tr>
 		</c:forEach>
-
+		
 	</table>
 
 </body>

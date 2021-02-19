@@ -27,6 +27,11 @@ public class CommentService {
 		return dao.getAll();
 	}
 	
+	public List<CommentVO> getComsByPostNo(Integer postNo) {
+		return dao.getComsByPostNo(postNo);
+	}
+	
+	
 	public CommentVO updateComment(Integer comNo,String comCon) {
 		
 		CommentVO commentVo = new CommentVO();

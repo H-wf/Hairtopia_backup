@@ -90,7 +90,7 @@ public class CommentDAO implements CommentDAO_Interface{
 	}	
 	
 	@Override
-	public List getComOfApost(Integer postNo) {
+	public List<CommentVO> getComsByPostNo(Integer postNo) {
 		List<CommentVO> list = new ArrayList<CommentVO>();
 		CommentVO commentVo = null;
 

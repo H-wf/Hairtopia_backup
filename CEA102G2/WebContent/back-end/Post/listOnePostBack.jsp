@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.post.model.*"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="com.post.model.*"%>
 <%@ page import="java.util.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
@@ -18,13 +18,13 @@ img {
 
 <title>貼文資料 - listOnePostBack.jsp</title>
 </head>
-<body bgcolor='#99FF99'>
+<body >
 
 	
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>貼文資料 - listOnePostBack.jsp</h3>
+				<h3>貼文資料 - listOnePostBack.jsp--${postVO.getPostNo()}</h3>
 				<h4>
 					<a href="<%=request.getContextPath()%>/back-end/Post/select_post_pageBack.jsp">
 					<img src="<%=request.getContextPath()%>/resource/images/back1.gif"
@@ -49,7 +49,8 @@ img {
 			</c:if>
 			<c:if test='${not empty postVO.postPic3}'>
 			<th>照片3</th>
-			</c:if>	
+			</c:if>
+			<th>新增留言</th>	
 		</tr>
 		<tr> 
 			<td>${postVO.desNo}</td>
@@ -59,16 +60,25 @@ img {
 			<td>${postVO.postPror}</td>
 			
 		<td><img src="<%=request.getContextPath()%>/PicFinder?pic=1&table=post&column=postPic1&idname=postNo&id=${postVO.postNo}" alt='沒有圖片' /></td>
-		<td>
-		 	<c:if test='${not empty postVO.postPic2}'>
+		 <c:if test='${not empty postVO.postPic2}'>
+			<td>
 		  		<img src="<%=request.getContextPath()%>/PicFinder?pic=1&table=post&column=postPic2&idname=postNo&id=${postVO.postNo}" alt='沒有圖片' />
-			</c:if>
-		</td>
+			</td>
+		</c:if>
 		
-		<td>
-			<c:if test='${not empty postVO.postPic3}'>
+		<c:if test='${not empty postVO.postPic3}'>
+			<td>
 		   		<img src="<%=request.getContextPath()%>/PicFinder?pic=1&table=post&column=postPic3&idname=postNo&id=${postVO.postNo}" alt='沒有圖片' />
-			</c:if>
+			</td>
+		</c:if>
+		<td>
+		<form method="post" action="<%=request.getContextPath()%>/comment/comment.do">
+		<input type="text" name="comCon">
+		<input type="hidden" name="postNo" value="${postVO.postNo}">
+		<input type="hidden" name="memNo" value="1">
+		<input type="hidden" name="action" value="insert">
+		<input type="submit" value="送出">
+		</form>
 		</td>
 						
 		</tr>

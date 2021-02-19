@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.comment.model.CommentService;
 import com.comment.model.CommentVO;
+import com.post.model.PostService;
+import com.post.model.PostVO;
 
 
 public class CommentServlet extends HttpServlet {
@@ -51,12 +53,17 @@ public class CommentServlet extends HttpServlet {
 			CommentService commentSvc = new CommentService();
 			commentSvc.addComment(postNo,memNo,comCon);
 			
-			String url = "/back-end/Comment/listAllComment.jsp";
+			PostService postSvc = new PostService();
+			PostVO postVO = postSvc.getOnePost(postNo);
+			
+			req.setAttribute("postVO", postVO);
+			
+			String url = "/back-end/Comment/listPostWithComments.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
 		
-		if("update_Comment".equals(action)) {
+		if("update_Comment".equals(action) || "update_Comment_Front".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			
@@ -76,35 +83,18 @@ public class CommentServlet extends HttpServlet {
 			CommentService commentSvc = new CommentService();
 			commentSvc.updateComment(comNo, comCon);
 			
-			String url = "/back-end/Comment/listAllComment.jsp";
+			String url = "";
+			if("update_Comment".equals(action)) {
+				url = "/back-end/Comment/listAllComment.jsp";
+			}else if("update_Comment_Front".equals(action)) {
+				url = "/front-end/Comment/listAllComment_front.jsp";
+			}
+			
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
 		
-		if("update_Comment_Front".equals(action)) {
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("errorMsgs", errorMsgs);
-			
-			String comCon = req.getParameter("comCon");
-			if (comCon == null || comCon.trim().length() == 0) {
-				errorMsgs.add("留言內容請勿空白!");
-			}
-			Integer comNo = new Integer(req.getParameter("comNo"));
-			if (comNo == null || comNo == 0) {
-				errorMsgs.add("請填入有效貼文編號!");
-			}
-			
-			CommentVO commentVo = new CommentVO();
-			commentVo.setPostNo(comNo);
-			commentVo.setComCon(comCon);
-			
-			CommentService commentSvc = new CommentService();
-			commentSvc.updateComment(comNo, comCon);
-			
-			String url = "/front-end/Comment/listAllComment_front.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url);
-			successView.forward(req, res);
-		}
+
 		
 		if("delete_Comment".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();

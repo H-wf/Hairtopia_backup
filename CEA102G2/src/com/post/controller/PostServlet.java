@@ -171,7 +171,7 @@ public class PostServlet extends HttpServlet {
 				if ("getOne_For_Display".equals(action)) {
 					url = "/front-end/Post/listOnePost.jsp";
 				} else if ("getOne_For_Display_back".equals(action)) {
-					url = "/back-end/Post/listOnePostBack.jsp";
+					url = "/back-end/Comment/listPostWithComments.jsp";
 				}
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneLec.jsp
 				successView.forward(req, res);
