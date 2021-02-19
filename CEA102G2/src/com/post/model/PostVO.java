@@ -7,9 +7,10 @@ public class PostVO implements java.io.Serializable{
 	private byte[] postPic1;
 	private byte[] postPic2;
 	private byte[] postPic3;
-	private java.sql.Date postTime;
+	private java.sql.Timestamp postTime;
 	private Integer postStatus;	//
 	private boolean postPror;
+	
 	public Integer getPostNo() {
 		return postNo;
 	}
@@ -46,10 +47,10 @@ public class PostVO implements java.io.Serializable{
 	public void setPostPic3(byte[] postPic3) {
 		this.postPic3 = postPic3;
 	}
-	public java.sql.Date getPostTime() {
+	public java.sql.Timestamp getPostTime() {
 		return postTime;
 	}
-	public void setPostTime(java.sql.Date postTime) {
+	public void setPostTime(java.sql.Timestamp postTime) {
 		this.postTime = postTime;
 	}
 	public Integer getPostStatus() {
