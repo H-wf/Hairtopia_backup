@@ -31,7 +31,7 @@ public class CommentDAO implements CommentDAO_Interface{
 	//取得單篇貼文留言
 	private static final String GET_DES_POST = "SELECT desNo , postCon, postPic1 FROM post where desNo = ?";	//front-end 複合查詢設計師名
 	
-	private static final String DELETE = "UPDATE hairtopia.comment SET comStatus=false WHERE comNo=?;";
+	private static final String DELETE = "UPDATE hairtopia.comment SET comStatus=? WHERE comNo=?;";
 	private static final String UPDATE = "UPDATE hairtopia.comment SET comCon=? WHERE comNo=?;";
 	
 	
@@ -71,14 +71,16 @@ public class CommentDAO implements CommentDAO_Interface{
 		}		
 	}
 	@Override
-	public void delete(Integer comNo) {
+	public void delete(CommentVO commentVo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
 		try {
 			con = ds.getConnection();
+			
 			pstmt = con.prepareStatement(DELETE);
-			pstmt.setInt(1, comNo);
+			pstmt.setBoolean(1, commentVo.isComStatus());
+			pstmt.setInt(2, commentVo.getComNo());
 			
 			pstmt.executeUpdate();
 		}  catch (SQLException e) {

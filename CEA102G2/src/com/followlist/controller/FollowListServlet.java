@@ -47,7 +47,7 @@ public class FollowListServlet extends HttpServlet {
 			FollowListService followListSvc = new FollowListService();
 			followListSvc.addFollow(memNo, desNo);
 			
-			String url = "/back-end/listAllFollowList.jsp";
+			String url = "/back-end/FollowList/listAllFollowList.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}

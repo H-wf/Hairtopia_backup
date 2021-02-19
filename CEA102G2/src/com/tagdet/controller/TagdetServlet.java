@@ -45,7 +45,7 @@ public class TagdetServlet extends HttpServlet {
 			TagdetService tagsetSvc = new TagdetService();
 			tagsetSvc.addTagdet(tagNo,postNo);
 			
-			String url = "/back-end/listAllTagdet.jsp";
+			String url = "/back-end/Tag/listAllTagdet.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 			

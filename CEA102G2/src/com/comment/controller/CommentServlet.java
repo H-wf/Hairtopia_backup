@@ -51,7 +51,7 @@ public class CommentServlet extends HttpServlet {
 			CommentService commentSvc = new CommentService();
 			commentSvc.addComment(postNo,memNo,comCon);
 			
-			String url = "/back-end/listAllComment.jsp";
+			String url = "/back-end/Comment/listAllComment.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
@@ -76,7 +76,7 @@ public class CommentServlet extends HttpServlet {
 			CommentService commentSvc = new CommentService();
 			commentSvc.updateComment(comNo, comCon);
 			
-			String url = "/back-end/listAllComment.jsp";
+			String url = "/back-end/Comment/listAllComment.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
@@ -89,11 +89,39 @@ public class CommentServlet extends HttpServlet {
 			if (comNo == null || comNo == 0) {
 				errorMsgs.add("請填入有效貼文編號!");
 			}
+			Boolean comStatus = new Boolean(req.getParameter("comStatus"));
+			
+			CommentVO commentVo = new CommentVO();
+			commentVo.setComNo(comNo);
+			commentVo.setComStatus(comStatus);
 			
 			CommentService commentSvc = new CommentService();
-			commentSvc.deleteComment(comNo);
+			commentSvc.deleteComment(commentVo);
 			
-			String url = "/back-end/listAllComment.jsp";
+			String url = "/back-end/Comment/listAllComment.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+			
+		}
+		
+		if("delete_Comment_Front".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			Integer comNo = new Integer(req.getParameter("comNo"));
+			if (comNo == null || comNo == 0) {
+				errorMsgs.add("請填入有效貼文編號!");
+			}
+			Boolean comStatus = new Boolean(req.getParameter("comStatus"));
+			
+			CommentVO commentVo = new CommentVO();
+			commentVo.setComNo(comNo);
+			commentVo.setComStatus(comStatus);
+			
+			CommentService commentSvc = new CommentService();
+			commentSvc.deleteComment(commentVo);
+			
+			String url = "/front-end/Comment/listAllComment_ftont.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 			

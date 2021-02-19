@@ -52,7 +52,7 @@ public class ComrepServlet extends HttpServlet {
 			ComrepService ComrepSvc = new ComrepService();
 			ComrepSvc.addComrep(comNo, memNo, crepCon);
 			
-			String url = "/back-end/listAllComRep.jsp";
+			String url = "/back-end/Comment/listAllComRep.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}

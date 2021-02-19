@@ -37,7 +37,7 @@ public class TagServlet extends HttpServlet {
 			TagService tagSvc = new TagService();
 			tagSvc.addTag(tagName);
 			
-			String url = "/back-end/listAllTag.jsp";
+			String url = "/back-end/Tag/listAllTag.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 			
@@ -64,7 +64,7 @@ public class TagServlet extends HttpServlet {
 			TagService tagSvc = new TagService();
 			tagSvc.updateTag(tagNo, tagName);
 			
-			String url = "/back-end/listAllTag.jsp";
+			String url = "/back-end/Tag/listAllTag.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
@@ -81,7 +81,7 @@ public class TagServlet extends HttpServlet {
 			TagService tagSvc = new TagService();
 			tagSvc.deleteTag(tagNo);
 			
-			String url = "/back-end/listAllTag.jsp";
+			String url = "/back-end/Tag/listAllTag.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}

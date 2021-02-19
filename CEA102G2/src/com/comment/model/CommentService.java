@@ -39,7 +39,7 @@ public class CommentService {
 		return commentVo;
 	}
 	
-	public void deleteComment(Integer comNo) {
-		dao.delete(comNo);
+	public void deleteComment(CommentVO commentVo) {
+		dao.delete(commentVo);
 	}
 }
