@@ -81,6 +81,31 @@ public class CommentServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 		
+		if("update_Comment_Front".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			String comCon = req.getParameter("comCon");
+			if (comCon == null || comCon.trim().length() == 0) {
+				errorMsgs.add("留言內容請勿空白!");
+			}
+			Integer comNo = new Integer(req.getParameter("comNo"));
+			if (comNo == null || comNo == 0) {
+				errorMsgs.add("請填入有效貼文編號!");
+			}
+			
+			CommentVO commentVo = new CommentVO();
+			commentVo.setPostNo(comNo);
+			commentVo.setComCon(comCon);
+			
+			CommentService commentSvc = new CommentService();
+			commentSvc.updateComment(comNo, comCon);
+			
+			String url = "/front-end/Comment/listAllComment_front.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+		}
+		
 		if("delete_Comment".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);

@@ -39,7 +39,7 @@
 			     <input type="text" name="comCon" value="${commentVo.comCon}">
 			     <input type="submit" value="修改">
 			     <input type="hidden" name="comNo" value= "${commentVo.comNo}">
-			     <input type="hidden" name="action"	value="update_Comment"></FORM>
+			     <input type="hidden" name="action"	value="update_Comment_Front"></FORM>
 				</td>
 				
 				<td>

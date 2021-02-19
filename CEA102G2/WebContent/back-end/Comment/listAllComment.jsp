@@ -33,7 +33,7 @@
 				<td>${commentVo.memNo}</td>
 				<td>${commentVo.comCon}</td>
 				<td>${commentVo.comTime}</td>
-				<td>${commentVo.comStatus}</td>
+				<td>${commentVo.comStatus == true?"顯示":"隱藏"}</td>
 				
 				<td>
 				<FORM method="post" action="<%=request.getContextPath()%>/comment/comment.do">
