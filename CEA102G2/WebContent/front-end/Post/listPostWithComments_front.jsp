@@ -77,7 +77,7 @@
 	</tr>
 	<c:forEach var="commentVo" items="${list}">
 	<c:if test= '${commentVo.comStatus != false}'>
-		<tr>
+		<tr ${(commentVo.comNo==param.comNo) ? 'bgcolor=#CCCCFF':''}>
 			
 				<td>${commentVo.memNo}</td>
 				<td>${commentVo.comCon}</td>

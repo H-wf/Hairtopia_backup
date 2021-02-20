@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="com.post.model.*"%>
 <%@ page import="java.util.*"%>
+<%@ page import="com.post.model.*"%>
 <%@ page import="com.comment.model.*"%>
 
 <%
@@ -83,7 +83,7 @@
 	</tr>
 	<c:forEach var="commentVo" items="${list}">
 
-		<tr>
+		<tr ${(commentVo.comNo==param.comNo) ? 'bgcolor=#CCCCFF':''}>
 			
 				<td>${commentVo.comNo}</td>
 				<td>${commentVo.memNo}</td>
