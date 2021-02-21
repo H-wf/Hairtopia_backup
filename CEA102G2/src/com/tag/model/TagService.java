@@ -25,7 +25,11 @@ public class TagService {
 		return dao.getAll();
 	}
 	
-public TagVO updateTag(Integer tagNo,String tagName) {
+	public Integer getTagNo(String tagName) {
+		return dao.findByTagName(tagName);
+	}
+	
+	public TagVO updateTag(Integer tagNo,String tagName) {
 		
 		TagVO tagVo = new TagVO();
 		

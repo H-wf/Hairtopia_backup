@@ -15,6 +15,7 @@ import javax.servlet.http.Part;
 
 import com.post.model.PostService;
 import com.post.model.PostVO;
+import com.tag.model.TagService;
 
 @MultipartConfig
 public class PostServlet extends HttpServlet {
@@ -596,6 +597,22 @@ public class PostServlet extends HttpServlet {
 				default:
 					errorMsgs.add("swithch goes wrong");
 
+				}
+				
+//				==================新增Tag===============================
+				
+				TagService tagSvc = new TagService();
+				String[] tagStr = (req.getParameter("tagName").split(","));
+				List tagList = new ArrayList();
+				for(String str:tagStr) {
+					String tagName = str.substring(str.indexOf(":")+2, str.lastIndexOf("\""));
+					Integer tagNo = tagSvc.getTagNo(tagName);
+					
+					if(tagNo != null) {
+						
+					}else {
+						
+					}
 				}
 				List<PostVO> list = new ArrayList<PostVO>();
 				list = postSvc.getAll(desNo);
