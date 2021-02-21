@@ -27,13 +27,8 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/css/icomoon.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/css/style.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/tagify/tagify.css">
-    <script src="<%=request.getContextPath()%>/resource/ckeditor/ckeditor.js"></script>
 
-	<script type="text/javascript">
-		window.onload=function () {
-			CKEDITOR.replace('postCon');
-		}
-	</script>
+    
 </head>
 <style>
     .navbar-brand img{
@@ -211,11 +206,17 @@
 <script src="<%=request.getContextPath()%>/dist/js/main.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="<%=request.getContextPath()%>/dist/tagify/jQuery.tagify.min.js"></script>
+<script src="<%=request.getContextPath()%>/resource/ckeditor/ckeditor.js"></script>
 <script>
         $('#loginModal').on('shown.bs.modal', function() {
             $('#myInput').trigger('focus')
         })
+        
         $('[name=mytag]').tagify();
+        
+        window.onload=function () {
+			CKEDITOR.replace('postCon');
+		}
         
         function processData() {
     		// getting data
