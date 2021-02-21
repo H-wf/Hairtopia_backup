@@ -11,20 +11,15 @@
     <title>Hairtopia</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css?family=Prata&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/css/animate.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/css/owl.carousel.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/css/owl.theme.default.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/css/magnific-popup.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/css/aos.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/css/ionicons.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/css/jquery.timepicker.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/css/flaticon.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/css/icomoon.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/css/style.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/tagify/tagify.css">
 
@@ -144,7 +139,7 @@
 			</tr>
 			<tr>
 			<td>標籤</td>
-				<td><input id="tag" name="tagName" placeholder="write some tags" value="predefined,tags,here" size="50"></td>
+				<td><input id="tagName" name="tagName" placeholder="write some tags" value="predefined,tags,here" size="50"></td>
 			</tr>
 			<tr>
 				<td>貼文照片1</td>
@@ -187,7 +182,7 @@
 
 	</form>
 </body>
-<script src="<%=request.getContextPath()%>/dist/js/jquery.min.js"></script>
+<script src="<%=request.getContextPath()%>/dist/js/jquery-3.2.1.min.js"></script>
 <script src="<%=request.getContextPath()%>/dist/js/jquery-migrate-3.0.1.min.js"></script>
 <script src="<%=request.getContextPath()%>/dist/js/jquery.easing.1.3.js"></script>
 <script src="<%=request.getContextPath()%>/dist/js/jquery.waypoints.min.js"></script><!-- << -->
@@ -201,18 +196,15 @@
 <script src="<%=request.getContextPath()%>/dist/js/aos.js"></script>
 <script src="<%=request.getContextPath()%>/dist/js/owl.carousel.min.js"></script><!-- << -->
 <script src="<%=request.getContextPath()%>/dist/js/scrollax.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="<%=request.getContextPath()%>/dist/js/google-map.js"></script>
 <script src="<%=request.getContextPath()%>/dist/js/main.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script src="<%=request.getContextPath()%>/dist/tagify/jQuery.tagify.min.js"></script>
 <script src="<%=request.getContextPath()%>/resource/ckeditor/ckeditor.js"></script>
+<script src="<%=request.getContextPath()%>/dist/tagify/jQuery.tagify.min.js"></script>
 <script>
         $('#loginModal').on('shown.bs.modal', function() {
             $('#myInput').trigger('focus')
         })
         
-        $('[name=mytag]').tagify();
+        $('#tagName').tagify();
         
         window.onload=function () {
 			CKEDITOR.replace('postCon');
