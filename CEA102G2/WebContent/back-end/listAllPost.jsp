@@ -17,7 +17,7 @@
 <body>
 <table>
 	<tr>
-		<th>貼文編號</th>
+		<th>貼文編號aa</th>
 		<th>設計師編號</th>
 		<th>貼文內容</th>
 		<th>照片</th>
