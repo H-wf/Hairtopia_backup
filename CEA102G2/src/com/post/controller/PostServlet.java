@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import com.post.model.PostService;
-import com.post.model.PostVO;
-import com.tag.model.TagService;
+import com.post.model.*;
+import com.tag.model.*;
+import com.tagdet.model.*;
 
 @MultipartConfig
 public class PostServlet extends HttpServlet {
@@ -255,7 +255,7 @@ public class PostServlet extends HttpServlet {
 
 				String postCon = req.getParameter("postCon");
 				if (postCon == null || postCon.trim().isEmpty() == true) {
-					errorMsgs.add("講師姓名: 請勿空白");
+					errorMsgs.add("貼文內容: 請勿空白");
 				} else if (postCon.length() > 2200) {
 					errorMsgs.add("貼文內容:長度必需在2到2200之間");
 				}
@@ -602,16 +602,31 @@ public class PostServlet extends HttpServlet {
 //				==================新增Tag===============================
 				
 				TagService tagSvc = new TagService();
+				TagdetService tagdetSvc = new TagdetService();
 				String[] tagStr = (req.getParameter("tagName").split(","));
-				List tagList = new ArrayList();
+				Integer postNo = postVO.getPostNo();
+				
 				for(String str:tagStr) {
 					String tagName = str.substring(str.indexOf(":")+2, str.lastIndexOf("\""));
 					Integer tagNo = tagSvc.getTagNo(tagName);
 					
+//			標籤存在，直接新增標明細
 					if(tagNo != null) {
 						
-					}else {
+						TagdetVO tagdetVo = new TagdetVO();
+						tagdetVo.setTagNo(tagNo);
+						tagdetVo.setPostNo(postNo);
 						
+						tagdetSvc.addTagdet(tagdetVo);
+//			標籤不存在，新增標籤後再新增標籤明細			
+					}else {
+						TagVO tagVo = tagSvc.addTag(tagName);
+						
+						TagdetVO tagdetVo = new TagdetVO();
+						tagdetVo.setTagNo(tagVo.getTagNo());
+						tagdetVo.setPostNo(postNo);
+						
+						tagdetSvc.addTagdet(tagdetVo);
 					}
 				}
 				List<PostVO> list = new ArrayList<PostVO>();

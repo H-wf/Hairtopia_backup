@@ -21,6 +21,11 @@ public class TagdetService {
 		return tagdetVo;
 	}
 	
+	public TagdetVO addTagdet(TagdetVO tagdetVo) {
+		dao.insert(tagdetVo);
+		return tagdetVo;
+	}
+	
 	public List<TagdetVO> getAll() {
 		return dao.getAll();
 	}

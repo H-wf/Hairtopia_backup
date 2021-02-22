@@ -1,9 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.*"%>
 <%@ page import="com.post.model.*"%>
-
 <%
-	PostVO postVO = (PostVO) request.getAttribute("postVO");
+	PostService postSvc = new PostService();
+	List<PostVO> list = postSvc.getAll();
+	pageContext.setAttribute("list", list);
 %>
 <html>
 
@@ -56,9 +59,43 @@
     padding-bottom: 1rem;
 }
 
-.tagify__tag-text{
-    color: #000;
-}
+	@media (min-width: 576px) {
+  .card-columns {
+	    column-count: 2;
+	  	}
+	}
+	@media (min-width: 768px) {
+	  .card-columns {
+	    column-count: 4;
+	  }
+	}
+	@media (min-width: 992px) {
+	  .card-columns {
+	    column-count: 4;
+	  }
+	}
+	@media (min-width: 1200px) {
+	  .card-columns {
+	    column-count: 4;
+	  }
+	}
+	.post{
+		padding-left: 8em;
+		padding-right: 7em;
+	}
+	.card:hover{
+     transform: scale(1.05);
+	  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+	}
+	.card{
+		hight:400px;
+	}
+  	.card:nth-child(even){
+  		margin-bottom: 2em;
+  	}
+  	.card:nth-child(odd){
+  		margin-top: 2em;
+  	}
 
 </style>
 
@@ -116,72 +153,32 @@
         </div>
     </div>
     <!-- END nav -->
-    <div class="tittle" style="height: 25vh;">
+<!-- carousel -->
+    <div id="carouselExampleSlidesOnly" class="carousel slide mb-5" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://picsum.photos/1300/300?random=2" class="d-block w-100">
+            </div>
+            <div class="carousel-item">
+                <img src="https://picsum.photos/1300/300?random=3" class="d-block w-100">
+            </div>
+            <div class="carousel-item">
+                <img src="https://picsum.photos/1300/300?random=4" class="d-block w-100">
+            </div>
+        </div>
     </div>
+    <!-- csrousel end -->
+	<div class="container post">
+		<div class="card-columns ">
+		<c:forEach  var="postVO" items="${list}">
+			<div class="card">
+				<img src="<%=request.getContextPath()%>/PicFinder?pic=1&table=post&column=postPic1&idname=postNo&id=${postVO.postNo}" class="card-img-top post-img" />
+			</div>
+		</c:forEach>
+		</div>
+	</div>
 
-<h3>資料新增:</h3>
-	<%-- 錯誤表列 --%>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message}</li>
-			</c:forEach>
-		</ul>
-	</c:if>
 
-	<form METHOD="POST" ACTION="<%=request.getContextPath()%>/post/post.do"
-		name="form" enctype="multipart/form-data">
-		<table>
-			<tr>
-				<td>設計師編號:</td>
-				<td><input type="TEXT" name="desNo" size="48" 
-					value="<%=(postVO == null) ? "" : postVO.getDesNo()%>" /></td>
-			</tr>
-			<tr>
-			<td>標籤</td>
-				<td><input id="tagName" name="tagName" placeholder="write some tags" value="predefined,tags,here" size="50"></td>
-			</tr>
-			<tr>
-				<td>貼文照片1</td>
-				<td><input type="file" name="upfile1" id="myFile"></td>
-			</tr>
-			<tr>
-				<td>貼文照片2</td>
-				<td><input type="file" name="upfile2" id="myFile"></td>
-			</tr>
-			<tr>
-				<td>貼文照片3</td>
-				<td><input type="file" name="upfile3" id="myFile"></td>
-			</tr>
-			<tr>
-				<td>是否隱藏</td>
-				<td><input type="radio" name="postStatus" 
-					value="0" /> 是
-					<input type="radio" name="postStatus" 
-					value="1"  checked/> 否
-				</td>
-			</tr>
-			
-			<tr>
-				<td>是否置頂</td>
-				<td><input type="radio" name="postPror" 
-					value="true" /> 是
-					<input type="radio" name="postPror" 
-					value="false"  checked/> 否
-				</td>
-			</tr>	
-			<tr>
-				<td>貼文編輯</td>
-				<td><textarea id='postCon' row="10" cols="48" name="postCon"
-						size="45" >${postVO.postCon}</textarea>
-				</td>
-			</tr>
-		</table>
-		<br> <input name="action" value="insert" type="hidden"> <input
-			type="button" value="新增" onclick="processData()">
-
-	</form>
 </body>
 <script src="<%=request.getContextPath()%>/dist/js/jquery-3.2.1.min.js"></script>
 <script src="<%=request.getContextPath()%>/dist/js/jquery-migrate-3.0.1.min.js"></script>
@@ -198,24 +195,11 @@
 <script src="<%=request.getContextPath()%>/dist/js/owl.carousel.min.js"></script><!-- << -->
 <script src="<%=request.getContextPath()%>/dist/js/scrollax.min.js"></script>
 <script src="<%=request.getContextPath()%>/dist/js/main.js"></script>
-<script src="<%=request.getContextPath()%>/resource/ckeditor/ckeditor.js"></script>
 <script src="<%=request.getContextPath()%>/dist/tagify/jQuery.tagify.min.js"></script>
 <script>
-        $('#loginModal').on('shown.bs.modal', function() {
-            $('#myInput').trigger('focus')
-        })
-        
-        $('#tagName').tagify();
-        
-        window.onload=function () {
-			CKEDITOR.replace('postCon');
-		}
-        
-        function processData() {
-    		// getting data
-    		var data = CKEDITOR.instances.postCon.getData()
-    		form.submit();
-    	}
+	$('#loginModal').on('shown.bs.modal', function() {
+	    $('#myInput').trigger('focus')
+	})
 </script>
 
 </html>

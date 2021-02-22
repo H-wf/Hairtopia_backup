@@ -51,9 +51,16 @@
 
 	<form METHOD="POST" ACTION="<%=request.getContextPath()%>/post/post.do" name="form1" enctype="multipart/form-data">
 		<table>
-		<tr>
+			<tr>
 				<td>貼文編號:</td>
+<!-- 				<td><input type="text" name="postNo"></td> -->
 				<td>${postVO.postNo}</td>
+
+			</tr>
+			
+			<tr>
+					<td>設計師編號:</td>
+<!-- 					<td><input type="text" name="desNo"></td> -->
 			</tr>
 			<tr>
 				<td>貼文照片1</td>
@@ -94,9 +101,10 @@
 		</table>
 	
 	
-	<br> <input type="hidden" name="action" value="update"> <input
-			type="hidden" name="postNo" value="${postVO.postNo}"> 
+	<br> <input type="hidden" name="action" value="update"> 
+			<input type="hidden" name="postNo" value="${postVO.postNo}"> 
 			<input type="hidden" name="desNo" value="${postVO.desNo}"> 
+	
 			<input type="submit" value="送出修改" onclick="processData()">
 		
 	</form>

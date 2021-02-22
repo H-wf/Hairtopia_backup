@@ -25,7 +25,7 @@ public class TagdetDAO implements TagdetDAO_Interface{
 		}
 	}
 	
-	private static final String INSERT_STMT = "INSERT INTO TAG(tagName) VALUES(?);";
+	private static final String INSERT_STMT = "INSERT INTO TAGDET(tagNo,postNo) VALUES(?,?);";
 	private static final String GET_ALL_STMT = "SELECT * FROM hairtopia.tagdet;";
 	private static final String GET_ONE_STMT = "SELECT desNo , postCon, postPic1 FROM post where postNo = ?";	//back-end
 	private static final String GET_DES_POST = "SELECT desNo , postCon, postPic1 FROM post where desNo = ?";	//front-end 複合查詢設計師名

@@ -1,9 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="com.post.model.*"%>
 <%@ page import="java.util.*"%>
-<%-- 此頁暫練習採用 Script 的寫法取值 --%>
+<%@ page import="com.post.model.*"%>
 <%
 	PostService postSvc = new PostService();
 	List<PostVO> list = postSvc.getAll();
@@ -91,7 +90,10 @@ img {
 						style="margin-bottom: 0px;">
 						<input type="submit" value="修改"> 
 						<input type="hidden" name="postNo" value="${postVO.postNo}"> 
-						<input type="hidden" name="action" value="getOne_For_UpdateBack">
+<%-- 						<input type="hidden" name="desNo" value="${postVO.desNo}">  --%>
+<%-- 						<input type="hidden" name="postPror" value="${postVO.postPror}">  --%>
+<!-- 						<input type="hidden" name="action" value="getOne_For_UpdateBack"> -->
+						<input type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
 				</td>
 				<td>

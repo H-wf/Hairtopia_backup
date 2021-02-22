@@ -32,13 +32,14 @@ public class PostDAO implements PostDAO_Interface {
 	private static final String DELETE = "DELETE FROM post where postNo = ?";
 
 	@Override
-	public void insert(PostVO postVO) {
+	public PostVO insert(PostVO postVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_STMT);
+			String[] cols = {"post"};
+			pstmt = con.prepareStatement(INSERT_STMT,cols);
 			pstmt.setInt(1, postVO.getDesNo());
 			pstmt.setString(2, postVO.getPostCon());
 			pstmt.setBytes(3, postVO.getPostPic1());
@@ -48,6 +49,19 @@ public class PostDAO implements PostDAO_Interface {
 			pstmt.setBoolean(7, postVO.isPostPror());
 
 			pstmt.executeUpdate();
+			
+			String next_postno = null;
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				next_postno = rs.getString(1);
+				System.out.println("自增主鍵值= " + next_postno +"(剛新增成功的貼文編號)");
+			} else {
+				System.out.println("未取得自增主鍵值");
+			}
+			rs.close();
+			
+			postVO.setPostNo(new Integer(next_postno));
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,15 +81,17 @@ public class PostDAO implements PostDAO_Interface {
 				}
 			}
 		}
+		return postVO;
 	}
 
-	public void insert2(PostVO postVO) {
+	public PostVO insert2(PostVO postVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_STMT2);
+			String cols[] = {"post"};
+			pstmt = con.prepareStatement(INSERT_STMT2,cols);
 			pstmt.setInt(1, postVO.getDesNo());
 			pstmt.setString(2, postVO.getPostCon());
 			pstmt.setBytes(3, postVO.getPostPic1());
@@ -84,6 +100,19 @@ public class PostDAO implements PostDAO_Interface {
 			pstmt.setBoolean(6, postVO.isPostPror());
 
 			pstmt.executeUpdate();
+			
+			String next_postno = null;
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				next_postno = rs.getString(1);
+				System.out.println("自增主鍵值= " + next_postno +"(剛新增成功的貼文編號)");
+			} else {
+				System.out.println("未取得自增主鍵值");
+			}
+			rs.close();
+			
+			postVO.setPostNo(new Integer(next_postno));
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -103,15 +132,17 @@ public class PostDAO implements PostDAO_Interface {
 				}
 			}
 		}
+		return postVO;
 	}
 
-	public void insert3(PostVO postVO) {
+	public PostVO insert3(PostVO postVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_STMT3);
+			String cols[] = {"post"};
+			pstmt = con.prepareStatement(INSERT_STMT3,cols);
 			pstmt.setInt(1, postVO.getDesNo());
 			pstmt.setString(2, postVO.getPostCon());
 			pstmt.setBytes(3, postVO.getPostPic1());
@@ -119,6 +150,19 @@ public class PostDAO implements PostDAO_Interface {
 			pstmt.setBoolean(5, postVO.isPostPror());
 
 			pstmt.executeUpdate();
+			
+			String next_postno = null;
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				next_postno = rs.getString(1);
+				System.out.println("自增主鍵值= " + next_postno +"(剛新增成功的貼文編號)");
+			} else {
+				System.out.println("未取得自增主鍵值");
+			}
+			rs.close();
+			
+			postVO.setPostNo(new Integer(next_postno));
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -138,6 +182,7 @@ public class PostDAO implements PostDAO_Interface {
 				}
 			}
 		}
+		return postVO;
 	}
 
 	@Override

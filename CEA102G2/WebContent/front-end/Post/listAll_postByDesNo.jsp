@@ -22,11 +22,12 @@ img {
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>講師資料 - listAllByDesNo.jsp</h3>
+				<h3>設計師貼文 - listAllByDesNo.jsp</h3>
 				<h4>
 					<a href="<%=request.getContextPath()%>/front-end/Post/select_post_page.jsp">
 					<img src="<%=request.getContextPath()%>/resource/images/back1.gif"
 						width="100" height="32" border="0">回首頁</a>
+					<a href="<%=request.getContextPath()%>/front-end/Post/InsertPostWithTag.jsp">繼續新增</a>
 				</h4>
 			</td>
 		</tr>

@@ -32,16 +32,30 @@ public class TagDAO implements TagDAO_Interface{
 	
 	
 	@Override
-	public void insert(TagVO tagVo) {
+	public TagVO insert(TagVO tagVo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_STMT);
+			String cols[] = {"tagNo"};
+			pstmt = con.prepareStatement(INSERT_STMT,cols);
 			pstmt.setString(1, tagVo.getTagName());
 			
 			pstmt.executeUpdate();
+			
+			String next_tagno = null;
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				next_tagno = rs.getString(1);
+				System.out.println("自增主鍵值= " + next_tagno +"(剛新增成功的標籤編號)");
+			} else {
+				System.out.println("未取得自增主鍵值");
+			}
+			rs.close();
+			
+			tagVo.setTagNo(new Integer(next_tagno));
+			
 		}  catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,7 +76,7 @@ public class TagDAO implements TagDAO_Interface{
 			}
 		}
 		
-	
+		return tagVo;
 	}
 	@Override
 	public void update(TagVO tagVo) {

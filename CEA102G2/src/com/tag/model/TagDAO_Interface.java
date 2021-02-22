@@ -3,7 +3,7 @@ package com.tag.model;
 import java.util.List;
 
 public interface TagDAO_Interface {
-	public void insert(TagVO tagVo);
+	public TagVO insert(TagVO tagVo);
     public void update(TagVO tagVo);
     public void delete(Integer tagNo);
     public TagVO findByPrimaryKey(Integer tagNo);

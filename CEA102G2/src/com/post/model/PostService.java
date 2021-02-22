@@ -23,7 +23,7 @@ public class PostService {
 		postVO.setPostPror(postPror);
 		
 		
-		dao.insert(postVO);
+		postVO = dao.insert(postVO);
 		
 		return postVO;
 	}
@@ -38,7 +38,7 @@ public class PostService {
 		postVO.setPostPror(postPror);
 		
 		
-		dao.insert2(postVO);
+		postVO = dao.insert2(postVO);
 		
 		return postVO;
 	}
@@ -52,7 +52,7 @@ public class PostService {
 		postVO.setPostPror(postPror);
 		
 		
-		dao.insert3(postVO);
+		postVO = dao.insert3(postVO);
 		
 		return postVO;
 	}
