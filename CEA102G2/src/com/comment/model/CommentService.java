@@ -28,6 +28,7 @@ public class CommentService {
 	}
 	
 	public List<CommentVO> getComsByPostNo(Integer postNo) {
+		System.out.println("回傳留言");
 		return dao.getComsByPostNo(postNo);
 	}
 	

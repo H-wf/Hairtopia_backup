@@ -26,18 +26,6 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/css/jquery.timepicker.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/css/style.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/tagify/tagify.css">
-    <script src="<%=request.getContextPath()%>/dist/js/jquery-3.2.1.min.js"></script>
-	<script src="<%=request.getContextPath()%>/dist/js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="<%=request.getContextPath()%>/dist/js/jquery.easing.1.3.js"></script>
-	<script src="<%=request.getContextPath()%>/dist/js/jquery.waypoints.min.js"></script><!-- << -->
-	<script src="<%=request.getContextPath()%>/dist/js/jquery.stellar.min.js"></script>
-	<script src="<%=request.getContextPath()%>/dist/js/jquery.magnific-popup.min.js"></script>
-	<script src="<%=request.getContextPath()%>/dist/js/jquery.animateNumber.min.js"></script>
-	<script src="<%=request.getContextPath()%>/dist/js/jquery.timepicker.min.js"></script>
-	<script src="<%=request.getContextPath()%>/dist/js/bootstrap.min.js"></script>
-	<script src="<%=request.getContextPath()%>/dist/js/bootstrap-datepicker.js"></script>
-	<script src="<%=request.getContextPath()%>/dist/js/popper.min.js"></script>
-	
 
     
 </head>
@@ -95,19 +83,19 @@
 		padding-left: 8em;
 		padding-right: 7em;
 	}
-/* 	.card:hover{ */
-/*      transform: scale(1.05); */
-/* 	  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06); */
-/* 	} */
+	.card:hover{
+     transform: scale(1.05);
+	  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+	}
 	.card{
 		hight:400px;
 	}
-/*   	.card:nth-child(even){ */
-/*   		margin-bottom: 2em; */
-/*   	} */
-/*   	.card:nth-child(odd){ */
-/*   		margin-top: 2em; */
-/*   	} */
+  	.card:nth-child(even){
+  		margin-bottom: 2em;
+  	}
+  	.card:nth-child(odd){
+  		margin-top: 2em;
+  	}
 
 </style>
 
@@ -144,60 +132,7 @@
             </ul>
         </div>
     </nav>
-   
-<!-- carousel -->
-    <div id="carouselExampleSlidesOnly" class="carousel slide mb-5" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="https://picsum.photos/1300/300?random=2" class="d-block w-100">
-            </div>
-            <div class="carousel-item">
-                <img src="https://picsum.photos/1300/300?random=3" class="d-block w-100">
-            </div>
-            <div class="carousel-item">
-                <img src="https://picsum.photos/1300/300?random=4" class="d-block w-100">
-            </div>
-        </div>
-    </div>
-    <!-- csrousel end -->
-	<div class="container post">
-		<div class="card-columns ">
-		<c:forEach  var="postVO" items="${list}">
-			<div class="card">
-				<img src="<%=request.getContextPath()%>/PicFinder?pic=1&table=post&column=postPic1&idname=postNo&id=${postVO.postNo}"
-				 class="card-img-top post-img" data-toggle="modal" data-target="#post${postVO.postNo}Modal" />
-			</div>
-			<!-- card Modal -->
-            <div class="modal fade" id="post${postVO.postNo}Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">POST</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <script>
-		        $("#post${postVO.postNo}Modal").on('shown.bs.modal', function() {
-		            $('#myInput').trigger('focus')
-		        });
-            </script>
-            <!--  -->
-		</c:forEach>
-		</div>
-	</div>
-
- <!-- Login Modal -->
+    <!-- Login Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -218,12 +153,81 @@
         </div>
     </div>
     <!-- END nav -->
+<!-- carousel -->
+    <div id="carouselExampleSlidesOnly" class="carousel slide mb-5" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://picsum.photos/1300/300?random=2" class="d-block w-100">
+            </div>
+            <div class="carousel-item">
+                <img src="https://picsum.photos/1300/300?random=3" class="d-block w-100">
+            </div>
+            <div class="carousel-item">
+                <img src="https://picsum.photos/1300/300?random=4" class="d-block w-100">
+            </div>
+        </div>
+    </div>
+    <!-- csrousel end -->
+   <h2> ${postVO.desNo}</h2>
+	<div class="container post">
+		<div class="card-columns ">
+		<c:forEach  var="postVO" items="${list}">
+		<div>
+			<a herf="<%=request.getContextPath()%>/post/post.do?postNo=${postVO.postNo}&action=getOne_For_Display" data-toggle="modal" data-target="#postModal">${postVO.postNo}</a>
+		</div>
+				<div class="card" >
+					<img src="<%=request.getContextPath()%>/PicFinder?pic=1&table=post&column=postPic1&idname=postNo&id=${postVO.postNo}"
+					 class="card-img-top post-img"  />
+				</div>
+			
+		</c:forEach>
+			<!-- card Modal -->
+			<c:if test="${postVO!=null}">
+            <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="postModal" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">POST</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <jsp:include page="/front-end/Post/listPostWithComments_front.jsp" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+            $("#postModal").modal({show: true});
+            </script>
+            <!--  -->
+            </c:if>
+		</div>
+	</div>
+
+
 </body>
-	<script src="<%=request.getContextPath()%>/dist/js/aos.js"></script>
-	<script src="<%=request.getContextPath()%>/dist/js/owl.carousel.min.js"></script><!-- << -->
-	<script src="<%=request.getContextPath()%>/dist/js/scrollax.min.js"></script>
-	<script src="<%=request.getContextPath()%>/dist/js/main.js"></script>
-	<script src="<%=request.getContextPath()%>/dist/tagify/jQuery.tagify.min.js"></script>
+<script src="<%=request.getContextPath()%>/dist/js/jquery-3.2.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/dist/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/dist/js/jquery.easing.1.3.js"></script>
+<script src="<%=request.getContextPath()%>/dist/js/jquery.waypoints.min.js"></script><!-- << -->
+<script src="<%=request.getContextPath()%>/dist/js/jquery.stellar.min.js"></script>
+<script src="<%=request.getContextPath()%>/dist/js/jquery.magnific-popup.min.js"></script>
+<script src="<%=request.getContextPath()%>/dist/js/jquery.animateNumber.min.js"></script>
+<script src="<%=request.getContextPath()%>/dist/js/jquery.timepicker.min.js"></script>
+<script src="<%=request.getContextPath()%>/dist/js/bootstrap.min.js"></script>
+<script src="<%=request.getContextPath()%>/dist/js/bootstrap-datepicker.js"></script>
+<script src="<%=request.getContextPath()%>/dist/js/popper.min.js"></script>
+<script src="<%=request.getContextPath()%>/dist/js/aos.js"></script>
+<script src="<%=request.getContextPath()%>/dist/js/owl.carousel.min.js"></script><!-- << -->
+<script src="<%=request.getContextPath()%>/dist/js/scrollax.min.js"></script>
+<script src="<%=request.getContextPath()%>/dist/js/main.js"></script>
+<script src="<%=request.getContextPath()%>/dist/tagify/jQuery.tagify.min.js"></script>
 <script>
 	$('#loginModal').on('shown.bs.modal', function() {
 	    $('#myInput').trigger('focus')
