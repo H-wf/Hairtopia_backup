@@ -98,10 +98,17 @@
 /* 	} */
 
 	.modal-dialog {
- 	  max-width: 62%;
+ 	  max-width: 70%;
+ 	  overflow: hidden;
 	}
-	.modal-body{
-	width:100%;
+	.includePage{
+	max-width:90%;
+	}
+	.modal-content .close{
+	position:absolute;
+	top:3%;
+	left:95%;
+	z-index: 9999999;
 	}
 </style>
 
@@ -194,11 +201,13 @@
             <div class="modal fade" id="postModal" tabindex="-1"  aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content">
-                            <button type="button" class="close text-right mr-3 mt-2" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close text-right" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         <div class="modal-body p-0 m-0">
-                            <jsp:include page="/front-end/Post/listPostWithComments_front.jsp" />
+                        	<div class="includePage">
+                            	<jsp:include page="/front-end/Post/listPostWithComments_front.jsp" />
+                        	</div>
                         </div>
                     </div>
                 </div>

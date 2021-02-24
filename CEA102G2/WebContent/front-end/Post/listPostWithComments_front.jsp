@@ -25,9 +25,6 @@
 	* {
 		box-sizing: border-box;
 	}
-	.input-group{
-		max-width: 100%;
-	}
 	img {
 		max-width: 100%;
 	}
@@ -44,13 +41,19 @@
 		font-size: 14px;
 		color: black;
 	}
+	.input-group{
+/* 	position:absolute; */
+	top:50%;
+	z-index: 9999999;
+	max-width: 100%;
+	}
+	.form-control{
+	height:45px !important;
+	font-size:15px;
+	}
 	
 	@media screen and (max-width: 576px) {
-		width
-		:
-		100%;
-		
-	
+		width:100%;
 	}
 	
 	@media ( min-width :576px) and (max-width:768px) {
