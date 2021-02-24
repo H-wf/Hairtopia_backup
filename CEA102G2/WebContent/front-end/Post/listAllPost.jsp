@@ -3,11 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*"%>
 <%@ page import="com.post.model.*"%>
-<%
-	PostService postSvc = new PostService();
-	List<PostVO> list = postSvc.getAll();
-	pageContext.setAttribute("list", list);
-%>
+
+<jsp:useBean id="postSvc"  scope="page" class="com.post.model.PostService" />
 <html>
 
 <head>
@@ -99,16 +96,13 @@
 /*      transform: scale(1.05); */
 /* 	  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06); */
 /* 	} */
-	.card{
-		hight:400px;
-	}
-/*   	.card:nth-child(even){ */
-/*   		margin-bottom: 2em; */
-/*   	} */
-/*   	.card:nth-child(odd){ */
-/*   		margin-top: 2em; */
-/*   	} */
 
+	.modal-dialog {
+ 	  max-width: 62%;
+	}
+	.modal-body{
+	width:100%;
+	}
 </style>
 
 <body>
@@ -160,39 +154,16 @@
         </div>
     </div>
     <!-- csrousel end -->
+    <h1></h1>
 	<div class="container post">
 		<div class="card-columns ">
-		<c:forEach  var="postVO" items="${list}">
+		<c:forEach  var="postVO" items="${postSvc.all}">
 			<div class="card">
 				<img src="<%=request.getContextPath()%>/PicFinder?pic=1&table=post&column=postPic1&idname=postNo&id=${postVO.postNo}"
 				 class="card-img-top post-img" data-toggle="modal" data-target="#post${postVO.postNo}Modal" />
+				 <a href="<%=request.getContextPath()%>/post/post.do?postNo=${postVO.postNo}&action=Display_fromListAll" >查看貼文</a>
 			</div>
-			<!-- card Modal -->
-            <div class="modal fade" id="post${postVO.postNo}Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">POST</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <script>
-		        $("#post${postVO.postNo}Modal").on('shown.bs.modal', function() {
-		            $('#myInput').trigger('focus')
-		        });
-            </script>
-            <!--  -->
+			
 		</c:forEach>
 		</div>
 	</div>
@@ -217,7 +188,29 @@
             </div>
         </div>
     </div>
-    <!-- END nav -->
+    <!-- Login Modal END  -->
+    <c:if test="${openModal != null}" >
+    <!-- Post Modal -->
+            <div class="modal fade" id="postModal" tabindex="-1"  aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                            <button type="button" class="close text-right mr-3 mt-2" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        <div class="modal-body p-0 m-0">
+                            <jsp:include page="/front-end/Post/listPostWithComments_front.jsp" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+ 			$("#postModal").modal({show: true},'handleUpdate');
+            </script>
+	<!-- Post END -->
+	</c:if>
+	
+	
+	
 </body>
 	<script src="<%=request.getContextPath()%>/dist/js/aos.js"></script>
 	<script src="<%=request.getContextPath()%>/dist/js/owl.carousel.min.js"></script><!-- << -->

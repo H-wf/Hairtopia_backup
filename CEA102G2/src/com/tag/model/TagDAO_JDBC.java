@@ -25,7 +25,7 @@ public class TagDAO_JDBC implements TagDAO_Interface{
 	
 	
 	@Override
-	public void insert(TagVO tagVo) {
+	public TagVO insert(TagVO tagVo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -43,7 +43,7 @@ public class TagDAO_JDBC implements TagDAO_Interface{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		return tagVo;
 	}
 	
 	@Override

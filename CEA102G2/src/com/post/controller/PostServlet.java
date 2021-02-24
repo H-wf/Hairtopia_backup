@@ -123,7 +123,7 @@ public class PostServlet extends HttpServlet {
 
 		}
 
-		if ("getOne_For_Display".equals(action) || "getOne_For_Display_back".equals(action)) { // 來自select_lec_page.jsp的請求
+		if ("getOne_For_Display".equals(action) || "getOne_For_Display_back".equals(action) || "Display_fromListAll".equals(action)) { // 來自select_lec_page.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -168,11 +168,17 @@ public class PostServlet extends HttpServlet {
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 
 				req.setAttribute("postVO", postVO); // 資料庫取出的lecVO物件,存入req
+				boolean openModal=true;
+				req.setAttribute("openModal",openModal );
+				System.out.println("postVO設置完成");
+				
 				String url = "";
 				if ("getOne_For_Display".equals(action)) {
-					url = "/front-end/Post/listAllPost.jsp";
+					url = "/front-end/Post/listPostWithComments_front.jsp";
 				} else if ("getOne_For_Display_back".equals(action)) {
 					url = "/back-end/Post/listPostWithComments.jsp";
+				}else if ("Display_fromListAll".equals(action)) {
+					url = "/front-end/Post/listAllPost.jsp";
 				}
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneLec.jsp
 				successView.forward(req, res);
