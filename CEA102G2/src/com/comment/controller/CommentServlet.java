@@ -63,7 +63,7 @@ public class CommentServlet extends HttpServlet {
 			if("insert".equals(action)) {
 				url = "/back-end/Post/listPostWithComments.jsp";
 			}else if("insert_Front".equals(action)) {
-				url = "/front-end/Post/listPostWithComments_front.jsp";
+				url = "/post/post.do?postNo="+postNo+"&action=Display_fromListAll";
 			}
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
