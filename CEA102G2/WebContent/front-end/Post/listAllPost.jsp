@@ -165,12 +165,12 @@
 	<div class="container post">
 		<div class="card-columns ">
 		<c:forEach  var="postVO" items="${postSvc.all}">
-			<div class="card">
-				<img src="<%=request.getContextPath()%>/PicFinder?pic=1&table=post&column=postPic1&idname=postNo&id=${postVO.postNo}"
-				 class="card-img-top post-img" data-toggle="modal" data-target="#post${postVO.postNo}Modal" />
-				 <a href="<%=request.getContextPath()%>/post/post.do?postNo=${postVO.postNo}&action=Display_fromListAll" >查看貼文</a>
-			</div>
-			
+			<a href="<%=request.getContextPath()%>/post/post.do?postNo=${postVO.postNo}&action=Display_fromListAll" >
+				<div class="card">
+					<img src="<%=request.getContextPath()%>/PicFinder?pic=1&table=post&column=postPic1&idname=postNo&id=${postVO.postNo}"
+					 class="card-img-top post-img" data-toggle="modal" data-target="#post${postVO.postNo}Modal" />
+				</div>
+			</a>
 		</c:forEach>
 		</div>
 	</div>

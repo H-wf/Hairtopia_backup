@@ -4,15 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="com.post.model.*"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.comment.model.*"%>
 
+<jsp:useBean id="commentSvc"  scope="page" class="com.comment.model.CommentService" />
+<jsp:useBean id="tagdetSvc"  scope="page" class="com.tagdet.model.TagdetService" />
+<jsp:useBean id="tagSvc"  scope="page" class="com.tag.model.TagService" />
 <%
 	PostVO postVO = (PostVO) request.getAttribute("postVO");
-%>
-<%
-	CommentService commentSvc = new CommentService();
-	List<CommentVO> list = commentSvc.getComsByPostNo(postVO.getPostNo());
-	pageContext.setAttribute("list", list);
 %>
 <html>
 <head>
@@ -92,13 +89,17 @@
 					<div class="card-title">
 						<h2>${postVO.desNo}</h2>
 						<h5 class="m-0">${postVO.postCon}</h5>
-						<small class="text-muted"><fmt:formatDate
-								value="${postVO.postTime}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
+						<c:forEach var="tagNo" items="${tagdetSvc.getTagNo(postVO.getPostNo())}">
+						<div class="badge badge-secondary">${tagSvc.getTagName(tagNo)}</div>
+						</c:forEach>
+						<br>
+						<small class="text-muted">
+						<fmt:formatDate	value="${postVO.postTime}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
 					</div>
 					<p class="card-text">
 
 						<ul class="list-unstyled">
-							<c:forEach var="commentVo" items="${list}">
+							<c:forEach var="commentVo" items="${commentSvc.getComsByPostNo(postVO.getPostNo())}">
 							<c:if test='${commentVo.comStatus != false}'>
 								<li class="media">
 									<!--            會員頭貼                  <img src="..." class="mr-3" alt="..."> -->

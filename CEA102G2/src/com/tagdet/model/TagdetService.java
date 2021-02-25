@@ -1,6 +1,6 @@
 package com.tagdet.model;
 
-import java.util.List;
+import java.util.*;
 
 
 public class TagdetService {
@@ -28,5 +28,9 @@ public class TagdetService {
 	
 	public List<TagdetVO> getAll() {
 		return dao.getAll();
+	}
+	
+	public Set<Integer> getTagNo(Integer postNo){
+		return dao.findByPostNo(postNo);
 	}
 }

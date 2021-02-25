@@ -28,6 +28,10 @@ public class TagService {
 	public Integer getTagNo(String tagName) {
 		return dao.findByTagName(tagName);
 	}
+
+	public String getTagName(Integer tagNo) {
+		return dao.findByTagNo(tagNo);
+	} 
 	
 	public TagVO updateTag(Integer tagNo,String tagName) {
 		
@@ -44,4 +48,5 @@ public class TagService {
 	public void deleteTag(Integer tagNo) {
 		dao.delete(tagNo);
 	}
+	
 }

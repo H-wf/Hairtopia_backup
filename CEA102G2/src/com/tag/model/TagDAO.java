@@ -27,6 +27,7 @@ public class TagDAO implements TagDAO_Interface{
 	private static final String INSERT_STMT = "INSERT INTO TAG(tagName) VALUES(?);";
 	private static final String GET_ALL_STMT = "SELECT * FROM hairtopia.tag;";
 	private static final String GET_NO_BY_TAG_NAME = "SELECT tagNo FROM hairtopia.tag WHERE tagName=?;";
+	private static final String GET_NO_BY_TAG_NO = "SELECT tagName FROM hairtopia.tag WHERE tagNo=?;";
 	private static final String DELETE = "DELETE FROM hairtopia.tag WHERE tagNo = ?;";
 	private static final String UPDATE = "UPDATE hairtopia.tag SET tagName=? WHERE tagNo=?;";
 	
@@ -112,9 +113,28 @@ public class TagDAO implements TagDAO_Interface{
 		}		
 	}
 	@Override
-	public TagVO findByPrimaryKey(Integer tagNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public String findByTagNo(Integer tagNo) {
+		String tagName = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_NO_BY_TAG_NO);
+			pstmt.setInt(1, tagNo);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				tagName = rs.getString("tagName");
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("Get tagName excetion. "
+					+ e.getMessage());
+		}
+		
+		return tagName;
 	}
 	
 	@Override
