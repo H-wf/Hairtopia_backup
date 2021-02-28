@@ -21,6 +21,18 @@
 	<filter-mapping>
 		<filter-name>sitemesh</filter-name>
 		<url-pattern>/front-end/*</url-pattern>
+		<servlet-name>*</servlet-name>
+<!-- 		<dispatcher>REQUEST</dispatcher> -->
+<!-- 		<dispatcher>FORWARD</dispatcher> -->
+<!-- 		<dispatcher>INCLUDE</dispatcher> -->
+<!-- 		<dispatcher>ERROR</dispatcher> -->
+<!-- 		<dispatcher>ASYNC</dispatcher> -->
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>/front-end/*</url-pattern>
+		<servlet-name>*</servlet-name>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 <!-- sitemesh濾器註冊 -->
 	<resource-ref>
