@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	id="WebApp_ID" version="4.0">
+	<display-name>CEA102G2</display-name>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+<!-- sitemesh濾器註冊 -->
+	<filter>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>/front-end/*</url-pattern>
+		<servlet-name>*</servlet-name>
+<!-- 		<dispatcher>REQUEST</dispatcher> -->
+<!-- 		<dispatcher>FORWARD</dispatcher> -->
+<!-- 		<dispatcher>INCLUDE</dispatcher> -->
+<!-- 		<dispatcher>ERROR</dispatcher> -->
+<!-- 		<dispatcher>ASYNC</dispatcher> -->
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>/front-end/*</url-pattern>
+		<servlet-name>*</servlet-name>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+<!-- sitemesh濾器註冊 -->
+	<resource-ref>
+		<description>DB Connection</description>
+		<res-ref-name>jdbc/root</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+<!-- servlet註冊 -->
+	<servlet>
+		<servlet-name>PostServlet</servlet-name>
+		<servlet-class>com.post.controller.PostServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PostServlet</servlet-name>
+		<url-pattern>/post/post.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>PostrepServlet</servlet-name>
+		<servlet-class>com.postrep.controller.PostrepServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PostrepServlet</servlet-name>
+		<url-pattern>/postrep/postrep.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>TagServlet</servlet-name>
+		<servlet-class>com.tag.controller.TagServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TagServlet</servlet-name>
+		<url-pattern>/tag/tag.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>TagdetServlet</servlet-name>
+		<servlet-class>com.tagdet.controller.TagdetServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TagdetServlet</servlet-name>
+		<url-pattern>/tagdet/tagdet.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CommentServlet</servlet-name>
+		<servlet-class>com.comment.controller.CommentServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CommentServlet</servlet-name>
+		<url-pattern>/comment/comment.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ComrepServlet</servlet-name>
+		<servlet-class>com.comrep.controller.ComrepServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ComrepServlet</servlet-name>
+		<url-pattern>/comrep/comrep.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>FollowListServlet</servlet-name>
+		<servlet-class>com.followlist.controller.FollowListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FollowListServlet</servlet-name>
+		<url-pattern>/followlist/followlist.do</url-pattern>
+	</servlet-mapping>
+
+
+<!-- servlet註冊 -->
+</web-app>
