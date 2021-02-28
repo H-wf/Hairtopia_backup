@@ -5,4 +5,5 @@
  
 <!-- 指明滿足“/exclude.jsp*”的頁面，將被排除，不被裝飾 -->
 <!--     <mapping path="/front-end/Comment/*" exclue="true" /> -->
+<!--     <mapping path="/front-end/Comment/*" exclue="true" /> -->
  </sitemesh>
